@@ -11,7 +11,7 @@ namespace vwcLib.Objects
         public string tagName { get; set; }
         public Dictionary<string, string> args { get; set; }
         public bool isSlt = false; //is Single line tag (/>)
-        public bool isStr = false; //is Single line tag (/>)
+        public bool isStr = false; //is String
         public string strVal = "";
 
         public Tag(string tagName)
@@ -41,9 +41,9 @@ namespace vwcLib.Objects
             string tStr = "";
             foreach (Tag _t in children)
             {
-                tStr += _t.ToString() + "\n";
+                tStr += _t.ToString() + ((_t.isStr) ? "" : "\n");
             }
-            return $"<{tagName} {str}{((isSlt) ? "/>":'>')}\n{((isSlt) ? "" : $"{tStr}</{tagName}>")}";
+            return $"<{tagName} {str}{((isSlt) ? "/>":'>')}\n{((isSlt) ? "" : $"{tStr}\n</{tagName}>")}";
         }
 
         public List<Tag> children = new List<Tag>();
